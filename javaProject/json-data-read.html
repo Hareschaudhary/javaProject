@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .flex {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            width: 40%;
+            height: 560px;
+            display: inline-block;
+            margin: 20px;
+            border: 2px solid black;
+        }
+
+        .img {
+            width: 100%;
+            height: 50%;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        button {
+            margin: 10px 40%;
+            font-size: 20px;
+            padding: 5px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex">
+        <div id="root">
+
+        </div>
+    </div>
+    <div class="button">
+        <button class="btnOne">try it</button>
+    </div>
+
+    <script>
+
+        const reasirs = async () => {
+
+            try {
+                const res = await fetch("https://dummyjson.com/products")
+                const data = await res.json();
+                console.log(data)
+                return data
+            } catch (e) {
+                return e
+            }
+        };
+        let root = document.querySelector("#root")
+        reasirs().then((data) => {
+            data.products.forEach(function (card) {
+                let cards = document.createElement("div")
+                cards.setAttribute("class", "card");
+                root.appendChild(cards)
+                let img = document.createElement("div")
+                img.setAttribute("class", "img")
+                img.innerHTML = `<img id="${card.id}" src="${card.images[0]}" alt="">`
+                cards.appendChild(img)
+                let pfive = document.createElement("button")
+                pfive.setAttribute("class", "btn")
+                pfive.innerHTML = `next img`
+                cards.appendChild(pfive)
+                let hone = document.createElement("h3")
+                hone.innerHTML = `brand =${card.brand} ${card.title}`
+                cards.appendChild(hone)
+                let pone = document.createElement("p")
+                pone.innerHTML = `category =${card.category}`
+                cards.appendChild(pone)
+                let ptwo = document.createElement("p")
+                ptwo.innerHTML = `description =${card.description}`
+                cards.appendChild(ptwo)
+                let pthree = document.createElement("p")
+                pthree.innerHTML = `price =${card.price}`
+                cards.appendChild(pthree)
+                let pfour = document.createElement("p")
+                pfour.innerHTML = `${card.id}`
+                cards.appendChild(pfour)
+
+                let btn = document.querySelectorAll(".btn")
+                let ii = 1
+                btn.forEach(function (bt) {
+                    bt.addEventListener("click", function (e) {
+                        let va = e.target.parentNode.childNodes[0]
+                        let i = e.target.parentNode.childNodes[6].innerHTML - 1
+                        va.innerHTML = `<img  src="${data.products[i].images[ii]}" alt="">`
+                        console.log(i)
+                        ii += 1
+                        if (ii == 4) {
+                            ii = 0
+                        }
+                    })
+                })
+            })
+        }).then((e) => {
+            console.log(e)
+        })
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
