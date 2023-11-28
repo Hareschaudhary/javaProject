@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            border: 2px solid red;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+
+        // class one************************
+
+        class Hotel {
+            constructor(hotelname, hotelmanejar, address) {
+                this.HotelName = hotelname
+                this.manejar = hotelmanejar
+                this.address = address
+            }
+            print() {
+                console.log(`hotelname ${this.HotelName}  hotelManeger ${this.manejar} hotel address ${this.address}`)
+            }
+        };
+
+        class HotelOne extends Hotel {
+            constructor(a, b, c) {
+                super(a, b, c)
+
+            }
+            gatter() {
+                super.print()
+                document.write(`hotelname ${this.HotelName} <br>  hotelManeger ${this.manejar} <br> hotel address ${this.address}`)
+            }
+        };
+
+        // let hotel =new Hotel("karnavati","hareshchaudhary","vadg ahemdabad")
+        // hotel.print()
+
+        // let hotelOne =new Hotel("patng","bharatchaudhary","sabrmati  ahemdabad")
+        // hotelOne.print()
+
+        // let childClass =new HotelOne("patngTwo","bharatpatel","sabrmati  ahemdabad")
+        // childClass.gatter()
+
+        //   ************************************
+
+        class Animal {
+            gatter(animalName, color, height,) {
+                this.animalName = animalName
+                this.color = color
+                this.height = height
+                document.write(`animal name; ${this.animalName} <br> color ${this.color}<br> height ${this.height} `)
+            }
+        };
+
+        class Dog extends Animal {
+            satter() {
+                console.log(`animal name; ${this.animalName}  color ${this.color} height ${this.height} `)
+            }
+        }
+
+        // let animalone=new Animal()
+        // animalone.gatter("cat","white","14inch")
+
+        // let dog = new Dog()
+        // dog.gatter("dog", "black", "1.8inch")
+        // dog.satter()
+
+
+        class Studant {
+            constructor(name, marksOne, marksTwo, marksThree) {
+                this.name = name
+                this.marksOne = marksOne
+                this.marksTwo = marksTwo
+                this.marksThree = marksThree
+                this.total = marksOne + marksTwo + marksThree
+            }
+            print() {
+                document.write(`
+               <table id="table">
+        <tr>
+            <td rowspan="2">name</td>
+            <td colspan="4">marks</td>
+        </tr>
+        <tr>
+            <td>
+                gujarati
+            </td>
+            <td>
+                hindi
+            </td>
+            <td>
+                polyti
+            </td>
+            <td>total marks</td>
+        </tr>
+        <tr>
+    <td>${this.name}</td>
+    <td>${this.marksOne}</td>
+    <td>${this.marksTwo}</td>
+    <td>${this.marksThree}</td>
+    <td>${this.total}</td>
+   </tr>
+    </table>
+                `)
+            }
+        };
+
+        class StudantOne extends Studant {
+            constructor(a,b,c,d){
+                super(a,b,c,d)
+            }
+            addtr() {
+                let table = document.getElementById("table")
+                let tr = document.createElement("tr")
+                tr.innerHTML = `
+                <td>${this.name}</td>
+                <td>${this.marksOne}</td>
+               <td>${this.marksTwo}</td>
+               <td>${this.marksThree}</td>
+                <td>${this.total}</td>`  
+                table.appendChild(tr)
+
+        }}
+
+        let studant = new  Studant("hares", 11, 22, 100);
+        studant.print()
+
+        let studantone = new StudantOne("bharat",99,100,20)
+        studantone.addtr()
+    </script>
+</body>
+
+</html>
