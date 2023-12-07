@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.832);
+      }
+      .box-one {
+        width: 45%;
+        height: 50vh;
+        overflow: scroll;
+        padding: 20px;
+        box-shadow: 0px 0px 6px black;
+        border-radius: 8px;
+        background-color: black;
+      }
+      .todos {
+        box-shadow: 0px 0px 5px black;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 5px;
+      }
+      .name {
+        width: calc(100% - 75px);
+        height: 30px;
+        border: none;
+        outline: none;
+        font-size: 22px;
+        border-radius: 5px;
+        padding: 0px 5px;
+      }
+      .todosbtn {
+        background-color: blue;
+        font-size: 22px;
+        width: 60px;
+        border-radius: 5px;
+        height: 30px;
+        border: none;
+        outline: none;
+      }
+      .center {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        background-color: white;
+        color: white;
+      }
+      .center input {
+        width: calc(100% - 150px);
+        height: 30px;
+        border: none;
+        outline: none;
+        font-size: 22px;
+        background-color: white;
+        color: black;
+        text-align: center;
+      }
+      .center button {
+        background-color: papayawhip;
+        font-size: 22px;
+        width: 80px;
+        border-radius: 5px;
+        height: 30px;
+        border: none;
+        outline: none;
+        margin: 0px 0px 0px 10px;
+      }
+      #checkbox{
+        margin: 0;
+        padding: 0;
+        width: 20px;
+        background-color: blue;
+      
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box-one">
+        <form action="">
+          <div class="todos">
+            <input
+              value=""
+              type="text"
+              class="name"
+              placeholder="enter your notes"
+            />
+            <button class="todosbtn">Add</button>
+          </div>
+        </form>
+        <div class="box"></div>
+      </div>
+    </div>
+    <script>
+      let form = document.querySelector("form");
+      let box = document.querySelector(".box");
+      let name=document.querySelector(".name")
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        let name = document.querySelector(".name");
+        let line = document.createElement("div");
+        line.setAttribute("class", "ennerinput");
+        box.prepend(line);
+
+        if (name.value.length > 3) {
+          let input = document.createElement("input");
+          input.setAttribute("readonly", `${true}`);
+          line.setAttribute("class", "center");
+          input.value = `${name.value}`;
+          line.append(input);
+
+          let btn = document.createElement("button");
+          btn.innerHTML = "change";
+          btn.setAttribute("class", "btn");
+          line.append(btn);
+
+          let btnone = document.createElement("button");
+          btnone.innerHTML = "delate";
+          btnone.setAttribute("class", "btnone");
+          line.append(btnone);
+
+          let inputo = document.createElement("input");
+          inputo.setAttribute("type", "checkbox");
+          inputo.setAttribute("id","checkbox");
+          line.prepend(inputo);
+          name.value=""
+        }
+        let button = document.querySelectorAll(".btn");
+        let i = 0;
+        button.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            let a = btn.parentNode.childNodes[1];
+            let b = btn.parentNode;
+            if (i == 0) {
+              a.removeAttribute("readonly");
+              btn.innerHTML = "save";
+              b.style.border = "2px solid red";
+            } else {
+              a.setAttribute("readonly", `${true}`);
+              btn.innerHTML = "change";
+              b.style.border = "0px solid red";
+            }
+            i++;
+            if (i == 2) {
+              i = 0;
+            }
+          });
+        });
+        let btnone = document.querySelectorAll(".btnone");
+        btnone.forEach((e) => {
+          e.addEventListener("click", function () {
+            e.parentNode.remove();
+          });
+        });
+        let chek=0
+        let checkbox =document.querySelectorAll("#checkbox")
+        checkbox.forEach((e)=>{
+          e.addEventListener("click",function(){
+            let val =e.parentNode.childNodes[1]
+            if(chek==0){
+              val.style.textDecoration ="line-through"
+            }else{
+              val.style.textDecoration ="none"
+            }
+            chek++
+            if(chek==2){
+              chek==0
+            }
+          })
+        })
+      });
+    </script>
+  </body>
+</html>
